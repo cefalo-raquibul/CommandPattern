@@ -23,13 +23,14 @@ public class ReadCommand implements Command
     @Override
     public void execute()
     {
-        list.read(index);
+        String value = list.read(index);
+        System.out.println("Value in index "+index+" is "+value);
     }
 
 
     @Override
     public void undo()
     {
-        System.out.println("Not supported");
+        System.out.println("Nothing to redo");
     }
 }

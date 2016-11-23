@@ -3,6 +3,7 @@ package com.cefalo.commandpattern;
 import com.cefalo.commandpattern.commands.AddCommand;
 import com.cefalo.commandpattern.commands.Command;
 import com.cefalo.commandpattern.commands.DeleteCommand;
+import com.cefalo.commandpattern.commands.ReadCommand;
 import com.cefalo.commandpattern.commands.UpdateCommand;
 import com.cefalo.commandpattern.invoker.CommandInvoker;
 import com.cefalo.commandpattern.receiver.CustomList;
@@ -62,6 +63,18 @@ public class Main
                         }
                     }
                 }
+                else if (splitted[0].equalsIgnoreCase("read")) {
+                    if (splitted.length >= 2) {
+                        try {
+                            int index = Integer.parseInt(splitted[1]);
+                            Command readCommand = new ReadCommand(customList, index);
+                            commandInvoker.execute(readCommand);
+                        }
+                        catch (Exception ex) {
+
+                        }
+                    }
+                }
                 System.out.println(customList.toString());
 
             }
@@ -73,12 +86,13 @@ public class Main
     static void printHelp()
     {
         System.out.println("");
-        System.out.println("available commands : add, del, up, undo, redo, exit, help");
+        System.out.println("available commands : add, del, up, undo, redo, read, exit, help");
         System.out.println("To undo: undo");
         System.out.println("To Redo: redo");
         System.out.println("add command example: add str1");
-        System.out.println("update command example(up index newupdatevalue):  up 1 str2");
+        System.out.println("update command example(up {index} newupdatevalue):  up 1 str2");
         System.out.println("Delete command example:  del");
+        System.out.println("Read command example(read {index}):  read 1");
         System.out.println("");
     }
 }
